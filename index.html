@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To the bestest girlfriend 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins&display=swap" rel="stylesheet">
+<style>
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ffc0cb, #ff99cc);
+        animation: bgShift 8s infinite alternate;
+    }
+
+    @keyframes bgShift {
+        0% { background: linear-gradient(135deg, #ffc0cb, #ff99cc); }
+        100% { background: linear-gradient(135deg, #ffb6c1, #ff69b4); }
+    }
+
+    .container {
+        text-align: center;
+        background: rgba(255,255,255,0.2);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        max-width: 90%;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+    }
+
+    button {
+        padding: 12px 22px;
+        border: none;
+        border-radius: 15px;
+        background: #ff4d88;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ff1a66;
+        transform: scale(1.05);
+    }
+
+    .hidden { display: none; }
+
+    /* Envelope */
+    .envelope {
+        width: 250px;
+        height: 160px;
+        background: #ff4d88;
+        position: relative;
+        margin: auto;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .flap {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #ff1a66;
+        clip-path: polygon(0 0, 100% 0, 50% 60%);
+        transition: 0.8s;
+        transform-origin: top;
+    }
+
+    .open .flap {
+        transform: rotateX(180deg);
+    }
+
+    .letter {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        background: white;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    /* Roses */
+    .rose {
+        position: absolute;
+        font-size: 22px;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Heartbeat effect */
+    .heartbeat {
+        display: inline-block;
+        animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-soft-piano-notes-574.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="page1">
+    <div class="envelope" onclick="openEnvelope(this)">
+        <div class="flap"></div>
+        <div class="letter">💌 Hii babyy, tap on this for a surprise</div>
+    </div>
+
+    <div id="question" class="hidden">
+        <h2>My cutieeeeeeeeee 💖</h2>
+        <p>THIS IS A SMALL TREAT FROM ME TO YOU😘💕</p>
+        <button onclick="goNext()">Press me baby 😩</button>
+    </div>
+</div>
+
+<div class="container hidden" id="page2">
+    <h2>🌸 You got this baby 🌸</h2>
+    <p id="quote" style="font-style: italic; font-size: 18px;"></p>
+    <div style="margin-top:20px;">
+        <h1 style="margin-bottom:10px;">I love you so much <span class="heartbeat">❤️</span></h1>
+        <p style="font-size:16px;"><b>Baby, whenever the world feels a little too heavy on you, come back here 💕</b></p>
+        <p style="font-size:16px;"><b>I'm always there for you, with you for anything 💖</b></p>
+        <p style="margin-top:15px; font-size:12px; opacity:0.7;">haha this ends the argument. I love you more 😌</p>
+    </div>
+</div>
+
+<script>
+    const quotes = [
+        "You're stronger than you think 💪❤️",
+        "Every step you take makes me proud of you 💖",
+        "Don't give up, I'm always with you 💕",
+        "You are capable of amazing things 🌸",
+        "Even on hard days, you shine ✨",
+        "I believe in you more than anything ❤️",
+        "You're my favorite person and my strongest one 💞",
+        "Keep going my love, success is close 💖",
+        "No matter what happens, I'm always here for you 💕",
+        "You make my world brighter every day 🌸",
+        "Kashvi, my weirdo, please don't stop being weird ✨"
+    ];
+
+    function openEnvelope(el) {
+        el.classList.add('open');
+        setTimeout(() => {
+            document.getElementById('question').classList.remove('hidden');
+        }, 800);
+    }
+
+    function goNext() {
+        document.getElementById('page1').classList.add('hidden');
+        document.getElementById('page2').classList.remove('hidden');
+        typeQuote();
+        createRoses();
+    }
+
+    function typeQuote() {
+        const quote = quotes[Math.floor(Math.random() * quotes.length)];
+        let i = 0;
+        const speed = 40;
+        const el = document.getElementById('quote');
+        el.innerHTML = '';
+
+        function typing() {
+            if (i < quote.length) {
+                el.innerHTML += quote.charAt(i);
+                i++;
+                setTimeout(typing, speed);
+            }
+        }
+
+        typing();
+    }
+
+    function createRoses() {
+        for (let i = 0; i < 25; i++) {
+            let rose = document.createElement('div');
+            rose.classList.add('rose');
+            rose.innerText = Math.random() > 0.5 ? '🌹' : '💐';
+            rose.style.left = Math.random() * 100 + 'vw';
+            rose.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(rose);
+        }
+    }
+</script>
+
+</body>
+</html>
